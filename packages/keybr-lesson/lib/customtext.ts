@@ -28,7 +28,11 @@ export class CustomTextLesson extends Lesson {
   }
 
   override generate(lessonKeys: LessonKeys, rng: RNGStream) {
-    return generateFragment(this.settings, this.#makeWordGenerator(rng));
+    return this.wordList.join(" ");
+  }
+
+  hasFinishedTyping(currentIndex: number): boolean {
+    return currentIndex >= this.wordList.length;
   }
 
   #makeWordGenerator(rng: RNGStream) {

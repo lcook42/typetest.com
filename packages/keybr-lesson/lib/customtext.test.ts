@@ -138,20 +138,9 @@ test("generate text with empty settings", () => {
   const lesson = new CustomTextLesson(settings, keyboard, model);
   const lessonKeys = lesson.update(makeKeyStatsMap(lesson.letters, []));
 
-  equal(
-    lesson.generate(lessonKeys, model.rng),
-    "? ? ? ? ? ? ? ? ? ? " +
-      "? ? ? ? ? ? ? ? ? ? " +
-      "? ? ? ? ? ? ? ? ? ? " +
-      "? ? ? ? ? ? ? ? ? ? " +
-      "? ? ? ? ? ? ? ? ? ? " +
-      "? ? ? ? ? ? ? ? ? ? " +
-      "? ? ? ? ? ? ? ? ? ? " +
-      "? ? ? ? ? ? ? ? ? ? " +
-      "? ? ? ? ? ? ? ? ? ? " +
-      "? ? ? ? ? ? ? ? ? ?",
-  );
-});
+  equal(lesson.generate(lessonKeys, model.rng), "");
+};
+
 
 describe("generate text using settings", () => {
   const keyboard = loadKeyboard(Layout.EN_US);
@@ -166,11 +155,7 @@ describe("generate text using settings", () => {
     const lesson = new CustomTextLesson(settings, keyboard, model);
     const lessonKeys = lesson.update(makeKeyStatsMap(lesson.letters, []));
 
-    equal(
-      lesson.generate(lessonKeys, model.rng),
-      "abc def abc def abc def abc def abc def abc def abc def abc def abc " +
-        "def abc def abc def abc def abc def abc def abc def abc def abc def",
-    );
+    equal(lesson.generate(lessonKeys, model.rng), "abc def");
   });
 
   it("should preserve case", () => {
@@ -183,11 +168,7 @@ describe("generate text using settings", () => {
     const lesson = new CustomTextLesson(settings, keyboard, model);
     const lessonKeys = lesson.update(makeKeyStatsMap(lesson.letters, []));
 
-    equal(
-      lesson.generate(lessonKeys, model.rng),
-      "Abc! Def? 123 Abc! Def? 123 Abc! Def? 123 Abc! Def? 123 Abc! Def? 123 " +
-        "Abc! Def? 123 Abc! Def? 123 Abc! Def? 123 Abc! Def? 123 Abc!",
-    );
+    equal(lesson.generate(lessonKeys, model.rng), "Abc! Def? 123");
   });
 });
 
@@ -207,11 +188,7 @@ describe("generate randomized text using settings", () => {
     const lesson = new CustomTextLesson(settings, keyboard, model);
     const lessonKeys = lesson.update(makeKeyStatsMap(lesson.letters, []));
 
-    equal(
-      lesson.generate(lessonKeys, model.rng),
-      "abc aaa bbb abc aaa bbb abc aaa bbb abc aaa bbb abc aaa bbb abc aaa " +
-        "bbb abc aaa bbb abc aaa bbb abc aaa bbb abc aaa bbb abc aaa bbb abc",
-    );
+    equal(lesson.generate(lessonKeys, model.rng), "abc aaa bbb");
   });
 
   it("should preserve case", () => {
@@ -227,11 +204,7 @@ describe("generate randomized text using settings", () => {
     const lesson = new CustomTextLesson(settings, keyboard, model);
     const lessonKeys = lesson.update(makeKeyStatsMap(lesson.letters, []));
 
-    equal(
-      lesson.generate(lessonKeys, model.rng),
-      "Abc! AAA bbb Abc! AAA bbb Abc! AAA bbb Abc! AAA bbb Abc! AAA bbb Abc! " +
-        "AAA bbb Abc! AAA bbb Abc! AAA bbb Abc! AAA bbb Abc! AAA bbb",
-    );
+    equal(lesson.generate(lessonKeys, model.rng), "Abc! AAA bbb CCC ccc");
   });
 });
 
@@ -239,7 +212,8 @@ test("generate full custom text without repeating", () => {
   const settings = new Settings().set(
     lessonProps.customText.content,
     "The quick brown fox jumps over the lazy dog.",
-  );
+  )
+    .set(lessonProps.customText.lowercase, false);
   const keyboard = loadKeyboard(Layout.EN_US);
   const model = new FakePhoneticModel();
   const lesson = new CustomTextLesson(settings, keyboard, model);

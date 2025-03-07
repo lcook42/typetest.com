@@ -3,6 +3,7 @@ export * from "./CurrentKey.tsx";
 export * from "./DailyGoal.tsx";
 export * from "./effort.ts";
 export * from "./EffortLegend.tsx";
+export * from "./EndScreen.tsx";
 export * from "./format.ts";
 export * from "./gauges.tsx";
 export * from "./indicators.tsx";

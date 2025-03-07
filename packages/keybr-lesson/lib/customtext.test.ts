@@ -139,7 +139,7 @@ test("generate text with empty settings", () => {
   const lessonKeys = lesson.update(makeKeyStatsMap(lesson.letters, []));
 
   equal(lesson.generate(lessonKeys, model.rng), "");
-};
+});
 
 
 describe("generate text using settings", () => {

@@ -3,7 +3,7 @@ import { Layout, loadKeyboard } from "@keybr/keyboard";
 import { FakePhoneticModel } from "@keybr/phonetic-model";
 import { makeKeyStatsMap } from "@keybr/result";
 import { Settings } from "@keybr/settings";
-import { deepEqual, equal, isNull } from "rich-assert";
+import { deepEqual, equal, isNull, ok } from "rich-assert";
 import { CustomTextLesson } from "./customtext.ts";
 import { LessonKey } from "./key.ts";
 import { lessonProps } from "./settings.ts";
@@ -233,4 +233,33 @@ describe("generate randomized text using settings", () => {
         "AAA bbb Abc! AAA bbb Abc! AAA bbb Abc! AAA bbb Abc! AAA bbb",
     );
   });
+});
+
+test("generate full custom text without repeating", () => {
+  const settings = new Settings().set(
+    lessonProps.customText.content,
+    "The quick brown fox jumps over the lazy dog.",
+  );
+  const keyboard = loadKeyboard(Layout.EN_US);
+  const model = new FakePhoneticModel();
+  const lesson = new CustomTextLesson(settings, keyboard, model);
+  const lessonKeys = lesson.update(makeKeyStatsMap(lesson.letters, []));
+
+  equal(
+    lesson.generate(lessonKeys, model.rng),
+    "The quick brown fox jumps over the lazy dog.",
+  );
+});
+
+test("check if user has finished typing", () => {
+  const settings = new Settings().set(
+    lessonProps.customText.content,
+    "The quick brown fox jumps over the lazy dog.",
+  );
+  const keyboard = loadKeyboard(Layout.EN_US);
+  const model = new FakePhoneticModel();
+  const lesson = new CustomTextLesson(settings, keyboard, model);
+
+  ok(lesson.hasFinishedTyping(9));
+  ok(!lesson.hasFinishedTyping(8));
 });

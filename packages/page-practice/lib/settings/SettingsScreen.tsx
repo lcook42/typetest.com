@@ -135,3 +135,34 @@ function Content({ onSubmit }: { readonly onSubmit: () => void }) {
     </Screen>
   );
 }
+
+function StartOverScreen({ onRestart }: { readonly onRestart: () => void }) {
+  const { formatMessage } = useIntl();
+  return (
+    <Screen>
+      <Header level={1}>
+        <FormattedMessage
+          id="startOverScreen.header"
+          defaultMessage="Typing Statistics"
+        />
+      </Header>
+      <FieldList>
+        <Field>
+          <Button
+            size={16}
+            icon={<Icon shape={mdiCheckCircle} />}
+            label={formatMessage({
+              id: "startOverScreen.restartButton",
+              defaultMessage: "Start Over",
+            })}
+            title={formatMessage({
+              id: "startOverScreen.restartButton.description",
+              defaultMessage: "Restart the typing test.",
+            })}
+            onClick={onRestart}
+          />
+        </Field>
+      </FieldList>
+    </Screen>
+  );
+}

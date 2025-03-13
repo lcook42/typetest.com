@@ -1,10 +1,10 @@
-import React from 'react';
+import type { ReactNode } from 'react';
 
-interface EndScreenProps {
+type EndScreenProps = {
   typingSpeed: number;
   accuracy: number;
   onStartOver: () => void;
-}
+};
 
 const EndScreen: React.FC<EndScreenProps> = ({ typingSpeed, accuracy, onStartOver }) => {
   return (

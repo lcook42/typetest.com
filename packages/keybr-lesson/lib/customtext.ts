@@ -54,4 +54,7 @@ export class CustomTextLesson extends Lesson {
     }
     return text;
   }
+  hasFinishedTyping(wordCount: number): boolean {
+    return this.wordIndex >= wordCount;
+  }
 }

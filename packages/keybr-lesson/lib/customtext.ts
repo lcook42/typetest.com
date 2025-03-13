@@ -24,4 +24,34 @@ export class CustomTextLesson extends Lesson {
   override update(keyStatsMap: KeyStatsMap) {
     return LessonKeys.includeAll(keyStatsMap, new Target(this.settings));
   }
+
+  override generate(lessonKeys: LessonKeys, rng: RNGStream) {
+    const content = this.settings.get(lessonProps.customText.content);
+    const lettersOnly = this.settings.get(lessonProps.customText.lettersOnly);
+    const lowercase = this.settings.get(lessonProps.customText.lowercase);
+    const randomize = this.settings.get(lessonProps.customText.randomize);
+    const codePoints = new Set(this.keyboard.getCodePoints());
+
+    let text = filterText(content, codePoints);
+    if (lettersOnly) {
+      for (const codePoint of codePoints) {
+        if (!this.model.language.includes(codePoint)) {
+          codePoints.delete(codePoint);
+        }
+      }
+      text = filterText(text, codePoints);
+    }
+    if (lowercase) {
+      text = this.model.language.lowerCase(text);
+    }
+    if (randomize) {
+      const words = text.split(" ");
+      for (let i = words.length - 1; i > 0; i--) {
+        const j = Math.floor(rng() * (i + 1));
+        [words[i], words[j]] = [words[j], words[i]];
+      }
+      text = words.join(" ");
+    }
+    return text;
+  }
 }

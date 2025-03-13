@@ -1,6 +1,6 @@
-import { type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { useManifest } from "./context.ts";
-import { type FavIconLink, type PreloadLink } from "./types.ts";
+import type { FavIconLink, PreloadLink } from "./types.ts";
 
 export function StylesheetAssets({
   entrypoint,

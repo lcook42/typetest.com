@@ -1,10 +1,11 @@
-import React from 'react';
+import type { ReactNode } from 'react';
+import PropTypes from 'prop-types';
 
-interface EndScreenProps {
+type EndScreenProps = {
   typingSpeed: number;
   accuracy: number;
   onStartOver: () => void;
-}
+};
 
 const EndScreen: React.FC<EndScreenProps> = ({ typingSpeed, accuracy, onStartOver }) => {
   return (
@@ -17,6 +18,12 @@ const EndScreen: React.FC<EndScreenProps> = ({ typingSpeed, accuracy, onStartOve
       <button onClick={onStartOver}>Start Over</button>
     </div>
   );
+};
+
+EndScreen.propTypes = {
+  typingSpeed: PropTypes.number.isRequired,
+  accuracy: PropTypes.number.isRequired,
+  onStartOver: PropTypes.func.isRequired,
 };
 
 export default EndScreen;

@@ -1,5 +1,11 @@
 #!/usr/bin/env -S npx tsnode
 
+import type { Container as ContainerType } from "@fastr/invert";
+import type { ConfigModule as ConfigModuleType, Env as EnvType } from "@keybr/config";
+import type { createSchema as createSchemaType, UserLoginRequest as UserLoginRequestType } from "@keybr/database";
+import type { Logger as LoggerType } from "@keybr/logger";
+import type KnexType from "knex";
+
 import { Container } from "@fastr/invert";
 import { ConfigModule, Env } from "@keybr/config";
 import { createSchema, UserLoginRequest } from "@keybr/database";

@@ -1,4 +1,4 @@
-import { type PreloadLink } from "./types.ts";
+import type { PreloadLink } from "./types.ts";
 
 export function preloadStyle(href: string): PreloadLink {
   return { href, rel: "preload", as: "style" };

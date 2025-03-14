@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { type Manifest } from "./manifest.ts";
+import type { Manifest } from "./manifest.ts";
 
 export const ManifestContext = createContext<Manifest>(null!);
 

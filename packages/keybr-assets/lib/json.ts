@@ -1,6 +1,6 @@
 import { isPlainObject } from "@keybr/lang";
 import { Manifest } from "./manifest.ts";
-import { type Entrypoint, type Script, type StylesheetLink } from "./types.ts";
+import type { Entrypoint, Script, StylesheetLink } from "./types.ts";
 
 export type ManifestJson = {
   readonly entrypoints: EntrypointsJson;

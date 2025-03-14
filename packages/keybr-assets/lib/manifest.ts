@@ -1,4 +1,4 @@
-import { type Entrypoint, type PreloadLink } from "./types.ts";
+import type { Entrypoint, PreloadLink } from "./types.ts";
 
 export abstract class Manifest {
   static fake = new (class extends Manifest {

@@ -1,6 +1,6 @@
 import { readFile, readFileSync } from "@sosimple/fsx";
 import { manifestFromJson } from "./json.ts";
-import { type Manifest } from "./manifest.ts";
+import type { Manifest } from "./manifest.ts";
 
 export async function loadManifest(path: string): Promise<Manifest> {
   const content = await readFile(path, "utf-8");
